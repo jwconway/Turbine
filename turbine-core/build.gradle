@@ -33,3 +33,9 @@ publishing {
     }
   }
 }
+
+task dockerRun(type: JavaExec) {
+    main = "com.netflix.turbine.StartTurbine"
+    classpath = sourceSets.main.runtimeClasspath
+    args = ["-port", project.getProperty('port'), "-streams", project.getProperty('streams')]
+}
