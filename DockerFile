@@ -1,0 +1,17 @@
+FROM java
+
+# Create app directory
+RUN mkdir -p /app
+WORKDIR /app
+
+# Bundle app source
+RUN apt-get update && apt-get install -y git-all
+RUN git clone https://github.com/jwconway/Turbine.git
+RUN cd Turbine 
+
+# Build the solution (using the gradle task)
+WORKDIR /app/Turbine/turbine-core
+
+EXPOSE 8989
+
+ENTRYPOINT .././gradlew dockerRun -Pport=$PORT -Pstreams=%STREAM
