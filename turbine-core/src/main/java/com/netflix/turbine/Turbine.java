@@ -52,7 +52,7 @@ public class Turbine {
 
         RxNetty.createHttpServer(port, (request, response) -> {
             logger.info("Turbine => SSE Request Received");
-            response.getHeaders().setHeader("Content-Type", "text/event-stream");
+            response.getHeaders().setHeader("Content-Type", "text/event-stream;charset=UTF-8");
             return publishedStreams
                     .doOnUnsubscribe(() -> logger.info("Turbine => Unsubscribing RxNetty server connection"))
                     .flatMap(data -> {
